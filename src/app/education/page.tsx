@@ -1,54 +1,49 @@
-"use client"
+import FramerWrapper from "@/components/animation/FramerWrapper";
+import Heading from "@/components/Heading";
+import { Badge } from "@/components/ui/badge";
+import { Briefcase } from "lucide-react";
+import { portfolioConfig } from "@/config/portfolio.config";
 
-import FramerWrapper from "@/components/animation/FramerWrapper"
-
-const education = [
-    {
-        degree: "B.Tech in Computer Science",
-        institution: "Your College Name",
-        year: "2022 – 2026",
-        description:
-            "Focused on Data Structures, Algorithms, Web Development, and Software Engineering.",
-    },
-]
-
-export default function EducationPage() {
+const educationPage = () => {
     return (
-        <section className="min-h-screen flex items-center">
-            <FramerWrapper>
-                <div className="max-w-4xl mx-auto px-4 space-y-8">
-
-                    {/* Heading */}
-                    <h1 className="text-4xl font-bold text-primary">
-                        Education
-                    </h1>
-
-                    {/* Education Cards */}
-                    {education.map((item) => (
-                        <div
-                            key={item.degree}
-                            className="border border-gray-800 rounded-xl p-6 space-y-2"
+        // ABOUT PAGE
+        <div className="h-full w-full relative flex flex-col items-start gap-5 overflow-hidden">
+            <Badge variant="secondary" className="gap-1.5 py-1 ">
+                <Briefcase className="h-4 w-4" />
+                Education
+            </Badge>
+            <div className="flex flex-col gap-3">
+                <Heading>My Education</Heading>
+            </div>
+            <div className="w-full h-fit flex flex-col">
+                {portfolioConfig.education.map((edu, index) => (
+                    <div className="w-full h-fit flex" key={index}>
+                        <FramerWrapper
+                            y={0}
+                            x={-100}
+                            delay={0.35 + index * 0.1}
+                            className="w-1/4 font-rubik flex items-center justify-evenly text-lg max-sm:text-base"
                         >
-                            <h2 className="text-2xl font-semibold">
-                                {item.degree}
-                            </h2>
-
-                            <p className="text-gray-400">
-                                {item.institution}
+                            {edu.period}
+                        </FramerWrapper>
+                        <FramerWrapper
+                            y={0}
+                            x={100}
+                            delay={0.35 + index * 0.1}
+                            className="relative w-3/4 border-l-4 border-l-[#3c3c3c] p-4 gap-3 education_point"
+                        >
+                            <div className="text-2xl font-rubik max-sm:text-xl">
+                                {edu.degree}, <br /> {edu.institution}
+                            </div>
+                            <p className="font-poppins text-base w-full text-primary max-sm:text-xs">
+                                {edu.description}
                             </p>
+                        </FramerWrapper>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
 
-                            <p className="text-sm text-gray-500">
-                                {item.year}
-                            </p>
-
-                            <p className="text-gray-400 pt-2">
-                                {item.description}
-                            </p>
-                        </div>
-                    ))}
-
-                </div>
-            </FramerWrapper>
-        </section>
-    )
-}
+export default educationPage;

@@ -1,39 +1,59 @@
-"use client"
+import AboutFooter from "@/components/AboutFooter";
+import FramerWrapper from "@/components/animation/FramerWrapper";
+import Heading from "@/components/Heading";
+import { Badge } from "@/components/ui/badge";
+import { Circle, Heart, User2 } from "lucide-react";
+import { portfolioConfig } from "@/config/portfolio.config";
 
-import FramerWrapper from "@/components/animation/FramerWrapper"
+const page = () => {
+    const items = portfolioConfig.about.hobbies.map((hobby) => ({ hobby }));
 
-export default function AboutPage() {
     return (
-        <section className="min-h-screen flex items-center">
-            <FramerWrapper>
-                <div className="max-w-4xl mx-auto px-4 space-y-6">
+        // ABOUT PAGE
+        <div className="h-full w-full relative flex flex-col items-start gap-5 overflow-hidden">
+            <Badge variant="secondary" className="gap-1.5 py-1 ">
+                <User2 className="h-4 w-4" />
+                About me
+            </Badge>
+            <div className="flex flex-col gap-5">
+                <Heading>
+                    {portfolioConfig.title} And Web <br /> Developer, Based In{" "}
+                    {portfolioConfig.about.personalInfo.nationality}.
+                </Heading>
 
-                    {/* Heading */}
-                    <h1 className="text-4xl font-bold text-primary">
-                        About Me
-                    </h1>
-
-                    {/* Intro */}
-                    <p className="text-gray-300">
-                        I am a passionate Frontend Developer with strong experience in
-                        building responsive, scalable, and user-friendly web applications.
+                <FramerWrapper y={0} x={100}>
+                    <p className=" font-poppins text-xl w-full text-primary max-sm:text-lg ">
+                        {portfolioConfig.about.bio}
                     </p>
-
-                    {/* Details */}
-                    <p className="text-gray-400">
-                        Currently, I focus on the MERN stack and Next.js, creating modern
-                        web interfaces using Tailwind CSS and component-driven development.
-                        I enjoy turning complex problems into simple and elegant solutions.
-                    </p>
-
-                    <p className="text-gray-400">
-                        I am continuously improving my DSA and system design skills to
-                        become a well-rounded software engineer and contribute effectively
-                        to fast-growing startups.
-                    </p>
-
+                </FramerWrapper>
+            </div>
+            <FramerWrapper
+                className="w-full flex flex-row justify-between max-lg:flex-col "
+                y={100}
+                delay={0.3}
+            >
+                <AboutFooter />
+            </FramerWrapper>
+            <FramerWrapper className="block" y={100} delay={0.31}>
+                <h1 className="gap-2 text-3xl font-poppins text-primary font-semibold flex icon_underline relative max-sm:text-2xl">
+                    {" "}
+                    <Heart className="h-8 w-8" /> Hobbies
+                </h1>
+                <div className="w-full h-fit p-2 flex flex-row justify-between gap-7 max-lg:flex-col">
+                    {items.map((val, indx) => {
+                        return (
+                            <div
+                                key={indx}
+                                className="flex gap-2 justify-center items-center flex-row text-xl text-primary pt-3 max-lg:justify-start "
+                            >
+                                <Circle className="h-3 w-3" /> {val.hobby}
+                            </div>
+                        );
+                    })}
                 </div>
             </FramerWrapper>
-        </section>
-    )
-}
+        </div>
+    );
+};
+
+export default page;

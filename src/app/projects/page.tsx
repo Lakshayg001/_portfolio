@@ -1,89 +1,38 @@
-"use client"
+import FramerWrapper from "@/components/animation/FramerWrapper";
+import Heading from "@/components/Heading";
+import ProjectCards from "@/components/ProjectsCard";
+import { Badge } from "@/components/ui/badge";
+import { Layers } from "lucide-react";
+import { portfolioConfig } from "@/config/portfolio.config";
 
-import FramerWrapper from "@/components/animation/FramerWrapper"
-import Link from "next/link"
-
-const projects = [
-    {
-        title: "Sketchers",
-        description:
-            "A collaborative drawing app where multiple users can draw on the same board in real time.",
-        tech: ["Next.js", "WebSockets", "Tailwind CSS"],
-        github: "https://github.com/",
-        live: "#",
-    },
-    {
-        title: "FindRoof",
-        description:
-            "A house rental platform with dashboards for owners and tenants built using MERN stack.",
-        tech: ["MongoDB", "Express", "React", "Node.js"],
-        github: "https://github.com/",
-        live: "#",
-    },
-]
-
-export default function ProjectsPage() {
+const projectsPage = () => {
     return (
-        <section className="min-h-screen py-20">
-            <FramerWrapper>
-                <div className="max-w-6xl mx-auto px-4 space-y-10">
+        // PROJECT PAGE
+        <div className="h-full w-full relative flex flex-col items-start gap-5 overflow-hidden">
+            <Badge variant="secondary" className="gap-1.5 py-1 ">
+                <Layers className="h-4 w-4" />
+                Projects
+            </Badge>
+            <div className="flex flex-col gap-3">
+                <Heading>My Projects</Heading>
+                <FramerWrapper y={0} x={200}>
+                    <p className=" font-poppins text-lg w-full text-primary max-sm:text-base">
+                        I love to Build Cool Projects. Here, you&#x27;ll find a curated
+                        collection of my creative endeavors and technical projects. Each
+                        piece represents a journey of innovation, problem-solving, and
+                        continuous learning. Feel free to explore this showcase of my
+                        passion and expertise in action.
+                    </p>
+                </FramerWrapper>
+            </div>
 
-                    {/* Heading */}
-                    <h1 className="text-4xl font-bold text-primary">
-                        Projects
-                    </h1>
+            <div className=" w-full flex flex-row flex-wrap gap-3 max-lg:flex-col">
+                {portfolioConfig.projects.map((val, indx) => {
+                    return <ProjectCards key={indx} value={val} num={indx} />;
+                })}
+            </div>
+        </div>
+    );
+};
 
-                    {/* Projects Grid */}
-                    <div className="grid md:grid-cols-2 gap-6">
-                        {projects.map((project) => (
-                            <div
-                                key={project.title}
-                                className="border border-gray-800 rounded-xl p-6 hover:border-primary transition"
-                            >
-                                <h2 className="text-2xl font-semibold">
-                                    {project.title}
-                                </h2>
-
-                                <p className="text-gray-400 mt-2">
-                                    {project.description}
-                                </p>
-
-                                {/* Tech Stack */}
-                                <div className="flex flex-wrap gap-2 mt-4">
-                                    {project.tech.map((item) => (
-                                        <span
-                                            key={item}
-                                            className="text-xs px-3 py-1 border border-gray-700 rounded-full"
-                                        >
-                                            {item}
-                                        </span>
-                                    ))}
-                                </div>
-
-                                {/* Links */}
-                                <div className="flex gap-4 mt-6">
-                                    <Link
-                                        href={project.github}
-                                        target="_blank"
-                                        className="text-sm text-primary hover:underline"
-                                    >
-                                        GitHub →
-                                    </Link>
-
-                                    <Link
-                                        href={project.live}
-                                        target="_blank"
-                                        className="text-sm text-primary hover:underline"
-                                    >
-                                        Live →
-                                    </Link>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                </div>
-            </FramerWrapper>
-        </section>
-    )
-}
+export default projectsPage;

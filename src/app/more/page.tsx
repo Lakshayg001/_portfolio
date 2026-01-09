@@ -1,64 +1,69 @@
-"use client"
+import Heading from "@/components/Heading";
+import { Badge } from "@/components/ui/badge";
+import { ExternalLink, PackagePlus } from "lucide-react";
+import {
+    Card,
+    CardContent,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import FramerWrapper from "@/components/animation/FramerWrapper";
+import { portfolioConfig } from "@/config/portfolio.config";
 
-import FramerWrapper from "@/components/animation/FramerWrapper"
-
-const achievements = [
-    "Solved 500+ DSA problems on LeetCode",
-    "Built multiple full-stack projects using MERN stack",
-    "Actively contributing to open-source projects",
-]
-
-const interests = [
-    "Problem Solving & DSA",
-    "System Design",
-    "UI/UX Design",
-    "Startup & Tech Blogging",
-]
-
-export default function MorePage() {
+const morePage = () => {
     return (
-        <section className="min-h-screen flex items-center">
-            <FramerWrapper>
-                <div className="max-w-5xl mx-auto px-4 space-y-10">
+        // ABOUT PAGE
+        <div className="h-full w-full relative flex flex-col items-start gap-5 overflow-hidden">
+            <Badge variant="secondary" className="gap-1.5 py-1 ">
+                <PackagePlus className="h-4 w-4" />
+                More
+            </Badge>
+            <div className="flex flex-col gap-3">
+                <Heading>More</Heading>
+            </div>
+            <div className="h-auto w-full flex flex-wrap gap-3 p-2">
+                {portfolioConfig.moreLinks.map((value, indx) => {
+                    return (
+                        <FramerWrapper
+                            key={indx}
+                            className="max-w-[32%] max-lg:max-w-full"
+                            y={0}
+                            scale={0.8}
+                            delay={indx / 4}
+                            duration={0.15}
+                        >
+                            <Card className="w-full">
+                                <CardHeader>
+                                    <CardTitle>{value.title}</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <p className="text-base font-poppins ">{value.description}</p>
+                                </CardContent>
+                                <CardFooter>
+                                    <Link
+                                        href={value.link}
+                                        target="blank"
+                                        className={cn(
+                                            buttonVariants({ variant: "default", size: "lg" }),
+                                            "w-full gap-3"
+                                        )}
+                                    >
+                                        {" "}
+                                        <ExternalLink />
+                                        Visit here
+                                    </Link>
+                                </CardFooter>
+                            </Card>
+                        </FramerWrapper>
+                    );
+                })}
+            </div>
+        </div>
+    );
+};
 
-                    {/* Heading */}
-                    <h1 className="text-4xl font-bold text-primary">
-                        More About Me
-                    </h1>
-
-                    {/* Achievements */}
-                    <div>
-                        <h2 className="text-2xl font-semibold mb-4">
-                            Achievements
-                        </h2>
-
-                        <ul className="space-y-2 text-gray-400 list-disc list-inside">
-                            {achievements.map((item) => (
-                                <li key={item}>{item}</li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Interests */}
-                    <div>
-                        <h2 className="text-2xl font-semibold mb-4">
-                            Interests
-                        </h2>
-
-                        <div className="flex flex-wrap gap-3">
-                            {interests.map((interest) => (
-                                <span
-                                    key={interest}
-                                    className="px-4 py-2 border border-gray-700 rounded-full text-sm"
-                                >
-                                    {interest}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-
-                </div>
-            </FramerWrapper>
-        </section>
-    )
-}
+export default morePage;

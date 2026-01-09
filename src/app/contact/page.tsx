@@ -1,59 +1,28 @@
-"use client"
+import ContactForm from "@/components/ContactForm";
+import FramerWrapper from "@/components/animation/FramerWrapper";
+import Heading from "@/components/Heading";
+import { Badge } from "@/components/ui/badge";
+import { Phone } from "lucide-react";
 
-import FramerWrapper from "@/components/animation/FramerWrapper"
-
-export default function ContactPage() {
+const contactPage = () => {
     return (
-        <section className="min-h-screen flex items-center">
-            <FramerWrapper>
-                <div className="max-w-4xl mx-auto px-4 space-y-8">
-
-                    {/* Heading */}
-                    <h1 className="text-4xl font-bold text-primary">
-                        Contact
-                    </h1>
-
-                    {/* Message */}
-                    <p className="text-gray-400">
-                        Have a project idea, internship opportunity, or just want to
-                        connect? Feel free to reach out.
-                    </p>
-
-                    {/* Contact Form */}
-                    <form className="space-y-4 max-w-md">
-                        <input
-                            type="text"
-                            placeholder="Your Name"
-                            className="w-full px-4 py-2 bg-transparent border border-gray-700 rounded-lg focus:outline-none focus:border-primary"
-                        />
-
-                        <input
-                            type="email"
-                            placeholder="Your Email"
-                            className="w-full px-4 py-2 bg-transparent border border-gray-700 rounded-lg focus:outline-none focus:border-primary"
-                        />
-
-                        <textarea
-                            placeholder="Your Message"
-                            rows={4}
-                            className="w-full px-4 py-2 bg-transparent border border-gray-700 rounded-lg focus:outline-none focus:border-primary"
-                        />
-
-                        <button
-                            type="submit"
-                            className="px-6 py-2 bg-primary text-black rounded-lg hover:opacity-90 transition"
-                        >
-                            Send Message
-                        </button>
-                    </form>
-
-                    {/* Email */}
-                    <p className="text-sm text-gray-500">
-                        Or email me at: <span className="text-primary">example@gmail.com</span>
-                    </p>
-
+        // PROJECT PAGE
+        <div className="h-full w-full relative flex flex-col items-start gap-5 overflow-hidden">
+            <Badge variant="secondary" className="gap-1.5 py-1 ">
+                <Phone className="h-4 w-4" />
+                Contact Us
+            </Badge>
+            <div className="flex flex-col gap-3 w-full">
+                <Heading>Contact Me!</Heading>
+                <div className="h-auto w-full flex justify-center items-center">
+                    <FramerWrapper y={0} scale={0.8}>
+                        <ContactForm />
+                    </FramerWrapper>
                 </div>
-            </FramerWrapper>
-        </section>
-    )
-}
+                <p className=" font-poppins text-lg w-full text-primary max-sm:text-base"></p>
+            </div>
+        </div>
+    );
+};
+
+export default contactPage;
