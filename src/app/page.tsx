@@ -1,39 +1,37 @@
-"use client"
+import SocialLinks from "@/components/SocialLinks";
+import HeroTexts from "@/components/HeroTexts";
+import HeroImage from "@/components/HeroImage";
+import FramerWrapper from "@/components/animation/FramerWrapper";
 
-import FramerWrapper from "@/components/animation/FramerWrapper"
-import TextRotator from "@/components/TextRotator"
-import SocialLinks from "../components/SocialLinks"
-export default function HomePage() {
+export default function Home() {
     return (
-        <section className="min-h-screen flex items-center justify-center">
-            <FramerWrapper>
-                <div className="max-w-4xl mx-auto px-4 text-center space-y-6">
-
-                    {/* Name */}
-                    <h1 className="text-4xl md:text-6xl font-bold">
-                        Hi, I’m <span className="text-primary">Lakshay Goel</span>
-                    </h1>
-
-                    {/* Rotating Text */}
-                    <TextRotator
-                        texts={[
-                            "Frontend Developer",
-                            "MERN Stack Developer",
-                            "Next.js Enthusiast",
-                        ]}
-                    />
-
-                    {/* Description */}
-                    <p className="text-gray-400 max-w-2xl mx-auto">
-                        I build modern, scalable, and high-performance web applications
-                        using React, Next.js, and Tailwind CSS.
-                    </p>
-
-                    {/* Social Links */}
+        <div className="flex flex-row justify-between items-center min-h-screen px-20 max-lg:flex-col mx-auto">
+            {/* LEFT SIDE  */}
+            <FramerWrapper
+                className=" h-full w-auto flex flex-col justify-start gap-4"
+                y={0}
+                x={-100}
+            >
+                <HeroTexts />
+                <div className="h-fit w-full p-4 flex gap-4">
                     <SocialLinks />
-
                 </div>
+                {/* <DownLoadResumeBtn /> */}
             </FramerWrapper>
-        </section>
-    )
+            {/* RIGHT SIDE image  */}
+            <FramerWrapper
+                className="h-full w-[47%] relative block   max-lg:hidden"
+                y={0}
+                x={100}
+            >
+                {/* IMAGE  */}
+                <HeroImage />
+
+            </FramerWrapper>
+
+            {/* GITHUB BUTTON  */}
+            {/* <GithubBtn /> */}
+        </div>
+    );
 }
+

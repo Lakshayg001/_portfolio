@@ -1,20 +1,65 @@
-import { Github, Linkedin, Mail } from "lucide-react"
-import Link from "next/link"
+import { cn } from "@/lib/utils";
+import {
+    Facebook,
+    Linkedin,
+    Twitter,
+    ExternalLink,
+    Github,
+} from "lucide-react";
+import { buttonVariants } from "./ui/button";
+import Link from "next/link";
+import FramerWrapper from "./animation/FramerWrapper";
+// import { portfolioConfig } from "@/config/portfolio.config";
 
-export default function SocialLinks() {
+const SocialLinks = () => {
+    const links = [
+        {
+            name: "Facebook",
+            link: "https://www.facebook.com/",
+            icon: <Facebook />,
+        },
+        {
+            name: "Twitter",
+            link: "https://twitter.com/",
+            icon: <Twitter />,
+        },
+        {
+            name: "Linkedin",
+            link: "https://www.linkedin.com/",
+            icon: <Linkedin />,
+        },
+        {
+            name: "External",
+            link: "https://www.external.com/",
+            icon: <ExternalLink />,
+        },
+        {
+            name: "Github",
+            link: "https://github.com/",
+            icon: <Github />,
+        },
+    ];
     return (
-        <div className="flex justify-center gap-6 pt-4">
-            <Link href="https://github.com/" target="_blank">
-                <Github className="hover:text-primary transition" />
-            </Link>
+        <>
+            {links.map((itm, indx) => {
+                const timing = 0.55 + indx * 0.125;
 
-            <Link href="https://linkedin.com/" target="_blank">
-                <Linkedin className="hover:text-primary transition" />
-            </Link>
+                return (
+                    <FramerWrapper key={indx} delay={timing} y={50}>
+                        <Link
+                            target="blank"
+                            href={itm.link}
+                            className={cn(
+                                buttonVariants({ variant: "outline", size: "icon" })
+                            )}
+                        >
+                            {itm.icon}
+                        </Link>
+                    </FramerWrapper>
+                );
+            })}
+        </>
+    );
+};
 
-            <Link href="mailto:example@gmail.com">
-                <Mail className="hover:text-primary transition" />
-            </Link>
-        </div>
-    )
-}
+export default SocialLinks;
